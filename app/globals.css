@@ -1,26 +1,185 @@
 @import "tailwindcss";
 
+/* global.css */
+
+/* Custom Fonts & Sizes */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --font-2xs: 0.75rem;
+  --font-xs: 0.8125rem;
+  --font-sm: 0.875rem;
+  --font-base: 1rem;
+  --font-lg: 1.125rem;
+  --font-xl: 1.25rem;
+  --font-2xl: 1.5rem;
+  --font-3xl: 1.875rem;
+  --font-4xl: 2.25rem;
+  --font-5xl: 3rem;
+  --font-6xl: 3.75rem;
+  --font-7xl: 4.5rem;
+  --font-8xl: 6rem;
+  --font-9xl: 8rem;
+
+  --color-lighter-dark: #0F172A;
+  --color-dark: #0B1120;
+
+  --color-body: #374151; /* zinc-700 */
+  --color-headings: #111827; /* zinc-900 */
+  --color-links: #10B981; /* emerald-500 */
+  --color-links-hover: #059669; /* emerald-600 */
+  --color-bold: #111827; /* zinc-900 */
+  --color-hr: rgba(17, 24, 39, 0.05); /* zinc-900 / 0.05 */
+  --color-quotes: #111827;
+  --color-quote-borders: #E5E7EB; /* zinc-200 */
+  --color-captions: #6B7280; /* zinc-500 */
+  --color-code-bg: #F3F4F6; /* zinc-100 */
+  --color-code-ring: #D1D5DB; /* zinc-300 */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Dark mode variables */
+.dark {
+  --color-body: #9CA3AF; /* zinc-400 */
+  --color-headings: #FFFFFF;
+  --color-links: #34D399; /* emerald-400 */
+  --color-links-hover: #10B981; /* emerald-500 */
+  --color-bold: #FFFFFF;
+  --color-hr: rgba(255,255,255,0.05);
+  --color-quotes: #F3F4F6;
+  --color-quote-borders: #374151;
+  --color-captions: #9CA3AF;
+  --color-code-bg: rgba(55, 65, 81, 0.15); /* zinc-700 / 0.15 */
+  --color-code-ring: rgba(255,255,255,0.1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Global Typography */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-size: var(--font-sm);
+  line-height: 1.75rem;
+  color: var(--color-body);
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+p {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.lead {
+  font-size: var(--font-base);
+  line-height: 1.75rem;
+}
+
+h1, h2, h3 {
+  color: var(--color-headings);
+  font-weight: 700;
+}
+
+h1 { font-size: var(--font-2xl); margin-bottom: 0.5rem; }
+h2 { font-size: var(--font-lg); margin-top: 4rem; margin-bottom: 0.5rem; font-weight: 600; }
+h3 { font-size: var(--font-base); margin-top: 2.5rem; margin-bottom: 0.5rem; font-weight: 600; }
+
+strong { font-weight: 600; color: var(--color-bold); }
+
+a {
+  color: var(--color-links);
+  font-weight: 500;
+  text-decoration: underline transparent;
+  transition: color 150ms ease, text-decoration-color 150ms ease;
+}
+
+a:hover {
+  color: var(--color-links-hover);
+  text-decoration-color: rgba(16, 185, 129, 0.3);
+}
+
+/* Lists */
+ul, ol {
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+  padding-left: 1.625rem;
+}
+
+ul { list-style-type: disc; }
+ol { list-style-type: decimal; }
+
+li {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+ol[type="A"] { list-style-type: upper-alpha; }
+ol[type="a"] { list-style-type: lower-alpha; }
+ol[type="I"] { list-style-type: upper-roman; }
+ol[type="i"] { list-style-type: lower-roman; }
+
+/* Blockquotes */
+blockquote {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--color-quotes);
+  border-left: 0.25rem solid var(--color-quote-borders);
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding-left: 1.25rem;
+  quotes: "“" "”" "‘" "’";
+}
+
+blockquote p:first-of-type::before { content: open-quote; }
+blockquote p:last-of-type::after { content: close-quote; }
+
+/* Horizontal rules */
+hr {
+  border-top-width: 1px;
+  border-color: var(--color-hr);
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+
+/* Code blocks */
+code {
+  font-size: var(--font-2xs);
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.375rem;
+  background-color: var(--color-code-bg);
+  box-shadow: inset 0 0 0 1px var(--color-code-ring);
+  color: var(--color-code);
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+thead th {
+  border-bottom-width: 1px;
+  border-bottom-color: var(--color-code-ring);
+  font-weight: 600;
+  padding: 0.5rem;
+}
+
+tbody td {
+  border-bottom-width: 1px;
+  border-bottom-color: var(--color-code-ring);
+  padding: 0.5rem;
+}
+
+/* Media (images/videos) */
+img, video, figure {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+figcaption {
+  font-size: var(--font-xs);
+  color: var(--color-captions);
+  margin-top: 0.5rem;
+}
+
+/* Max Widths */
+@media (min-width: 1024px) {
+  body { max-width: 50rem; }
 }
