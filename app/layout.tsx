@@ -3,7 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from '../components/Header'
 import { getDocuments } from "@/lib/doc";
-
+import { Suspense } from "react";
+import Loading from '../components/Loading'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
   description: "A dcumentation website by Protocol",
 };
 
-export default function RootLayout({
+export default  function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -32,6 +33,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       > <div className="h-full w-full">
+        <Suspense fallback ={ <Loading /> }>
           <Header docs={allDocuments}/>
           <div className="relative px-4 pt-14 sm:px-6 lg:px-8">
             <main className="flex-auto py-16">
@@ -43,6 +45,7 @@ export default function RootLayout({
               {children}
             </main>
           </div>
+          </Suspense>
         </div>
       </body>
     </html>
