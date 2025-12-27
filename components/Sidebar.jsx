@@ -9,7 +9,7 @@ const Sidebar = ({ docs }) => {
     ({ parent }) => parent
   );
 
-  console.log("All docs IDs:", docs.map(d => d.id));
+  
 
 
   return (
