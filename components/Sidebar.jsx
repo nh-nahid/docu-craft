@@ -20,7 +20,7 @@ const Sidebar = ({ docs }) => {
     } else if(pathName.includes('/categories')){
       const category = pathName.split("/")[2];
       matchedDocs = getDocumentByCategory(docs, category);
-    } else if(pathName.includes(' /authors')){
+    } else if(pathName.includes('/authors')){
       const author = pathName.split("/")[2];
       matchedDocs = getDocumentByAuthor(docs, author)
 
